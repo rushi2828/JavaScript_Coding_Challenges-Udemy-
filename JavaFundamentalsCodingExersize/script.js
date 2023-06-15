@@ -280,3 +280,5 @@ const calcAverage = function (arr) {
 console.log(calcAverage([2, 3, 7]));
 console.log(calcAverage(totals1));
 console.log(calcAverage(tips1));
+
+console.log('====Completed Chg#2.4 =====');
