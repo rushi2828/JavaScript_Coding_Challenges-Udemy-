@@ -49,6 +49,10 @@ const restaurant = {
       `Order received!!! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be deleiverd to ${address} at ${time}`
     );
   },
+
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(`Here is your pasta with ${ing1},${ing2} and ${ing3}`);
+  },
 };
 
 /*
@@ -204,3 +208,74 @@ console.log('====');
 const newMenu = [...restaurant.mainMenu, 'Gnocci'];
 console.log(newMenu); //['Pizza', 'Pasta', 'Risotto', 'Gnocci']
 console.log('====');
+
+// Copy array(Shallow copy)
+const mainMenuCopy = [...restaurant.mainMenu];
+console.log(mainMenuCopy);
+console.log('====');
+
+//Join 2 array
+const menu = [...restaurant.mainMenu, ...restaurant.starterMenu];
+console.log(menu); //['Pizza', 'Pasta', 'Risotto', 'Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad']
+console.log('====');
+
+// Spred operator works for Iterables i,e arrays, Sting, maps, sets but not objects
+const str = 'Rushikesh';
+console.log(...str); //R u s h i k e s h
+console.log('====');
+
+const letters = [...str, '', 'S'];
+console.log(letters); //['R', 'u', 's', 'h', 'i', 'k', 'e', 's', 'h', '', 'S']
+console.log('====');
+// const ingrediants = [ prompt("Lets\'s make pasta ingredients 1?)", prompt('ingredients2'), prompt('ingredients 3'),];
+// console.log(ingrediants);
+
+// const ingrediants = [
+//   prompt("Let's male pasta ingredients1?"),
+//   prompt('ingredients2'),
+//   prompt('ingredients3'),
+// ];
+// console.log(ingrediants);
+
+// restaurant.orderPasta(...ingrediants); //Here is your pasta with egg,curry and onion
+
+// Object
+const newRestaurant = { foundedIn: 1998, ...restaurant, Founder: 'Rushi' };
+
+console.log(newRestaurant);
+console.log('====');
+
+/*
+/////////////////////////////////////
+Rest operator i.e (...) and Parameters
+REST because of left side i.e before '='
+*/
+
+const [a, b, ...others] = [1, 2, 3, 4, 5, 6, 7];
+console.log(a, b, others); //1 2 (5) [3, 4, 5, 6, 7]
+console.log('====');
+
+const [pizza, risotto, ...otherFood] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+
+console.log(pizza, risotto, otherFood); //Pizza Pasta (5) ['Risotto', 'Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad']
+console.log('====');
+// Objects
+const { sat, ...weekDays } = restaurant.openingHours;
+console.log(sat, weekDays); //{open: 0, close: 24} {thu: {…}, fri: {…}}
+console.log('====');
+
+// Functions
+const add = function (...numbers) {
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) {
+    sum += numbers[i];
+  }
+  console.log(sum);
+};
+
+add(1, 2);
+add(3, 4, 5, 6, 7);
+add(8, 9, 0, 11, 12, 13, 14);
