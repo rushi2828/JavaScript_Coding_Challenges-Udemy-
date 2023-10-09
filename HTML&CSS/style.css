@@ -1,9 +1,70 @@
+* {
+  margin: 0;
+  padding: auto;
+  box-sizing: border-box;
+}
+
+/* for body */
 body {
   background-color: rgb(229, 231, 119);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
+  padding: 50px;
 }
 
+/*for header */
 h1 {
   font-size: 40px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* for class */
+.first {
+  color: blue;
+}
+
+/* .second {
+  column-gap: 2px;
+} */
+
+/* for all paragraph */
+p {
+  margin-bottom: 20px;
+}
+
+/* for id */
+#your-name {
+  color: brown;
+  border: 5px solid #444;
+  width: 400px;
+  padding: 25px;
+  margin-top: 30px;
+}
+
+/* for input tag and button */
+input,
+button {
+  padding: 10px;
+  font-size: 15px;
+}
+
+/* for 'a' tag i.e for url */
+a {
+  background-color: yellow;
+}
+
+/* for child i.e here h2 in under 'id' of 'your-name' */
+#your-name h2 {
+  color: blueviolet;
+}
+
+/* image */
+#first-image {
+  width: 200px;
+  height: 150px;
 }
