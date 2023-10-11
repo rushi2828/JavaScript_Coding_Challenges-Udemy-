@@ -279,3 +279,116 @@ const add = function (...numbers) {
 add(1, 2);
 add(3, 4, 5, 6, 7);
 add(8, 9, 0, 11, 12, 13, 14);
+console.log('====');
+
+/*
+/////////////////////////////////////
+Rest operator i.e (...) and Parameters
+Short circuiting i.e && and || operator
+-It is used in ANY data types and return ANY data types 
+
+*/
+console.log(5 || 'rushi'); // 5
+
+/*
+Short circuiting (for || operator )
+- return first true value 
+- return last falsy value if all values are falsy 
+- Falsy value's are:= ' ', undefined, false 
+*/
+console.log('=====OR=====');
+console.log('' || 'Rushi'); // Rushi
+console.log(true || 0); // true
+console.log(undefined || null); // null
+console.log(0 || ''); // empty (both falsy)
+
+console.log(undefined || 0 || '' || 'hello' || 23 || null); //hello (first non-falsy value will be printing)
+
+// Practical example
+// without short circuiting i.e || operator
+const guest1 = restaurant.newGuest ? restaurant.newGuest : 10;
+console.log(guest1); // 10 (restaurant.newGuest does not exist that's why it falsy so 10 printed )
+// with short circuiting i.e || operator
+console.log(restaurant.newGuest || 10); //10
+
+/*
+Short circuiting (for &&  operator )
+- return first falsy value 
+- exact opposite of OR(||) operator
+Falsy value's are:= ' ', undefined, false 
+*/
+console.log('=====AND=====');
+console.log(8 && 'Rushi'); //Rushi
+console.log(0 && 'Rushi'); //0
+console.log('' && 'Rushi'); // ''
+console.log(true && 0); // 0
+console.log(undefined && null); // undefined // undefined
+console.log(0 && ''); // 0
+console.log(undefined && 0); // undefined
+
+// Practical example
+restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach');
+
+/*
+/////////////////////////////////////
+Nullish coalescing operator(??)
+*/
+
+// restaurant.newGuest = 0;
+const guest2 = restaurant.newGuest || 10;
+console.log(guest2); // 10
+console.log('====');
+
+// Nullish values : null and undefined (Not 0 and '')
+// return other values if there is null and undefined
+// 0 and '' not considering nullish values so it will return
+const guestCorrect = restaurant.newGuest ?? 10;
+console.log(guestCorrect);
+console.log('====');
+
+/*
+/////////////////////////////////////
+Logical Assignment operator
+*/
+
+const rest1 = {
+  name: 'don',
+  numGuests: 0,
+};
+
+const rest2 = {
+  name: 'mod plazza',
+  owner: 'D Ben',
+};
+
+// short circuiting, return true value for || operator
+rest1.numGuests = rest1.numGuests || 10;
+console.log(rest1); // {name: 'don', numGuests: 20}
+console.log('====');
+rest2.numGuests = rest2.numGuests || 10;
+console.log(rest2); // {name: 'mod plazza', owner: 'D Ben', numGuests: 10}
+console.log('====');
+
+// OR assigning operator
+rest1.numGuests ||= 10; //same like : rest1.numGuests = rest1.numGuests || 10;
+rest2.numGuests ||= 10; // same like : rest2.numGuests = rest2.numGuests || 10;
+
+console.log(rest1); // {name: 'don', numGuests: 10}
+console.log(rest2); // {name: 'mod plazza', owner: 'D Ben', numGuests: 10}
+console.log('====');
+
+//nullish assigning operator
+rest1.numGuests ??= 10; //same like : rest1.numGuests = rest1.numGuests && 10;
+rest2.numGuests ??= 10; //same like : rest2.numGuests = rest1.numGuests && 10;
+
+console.log(rest1); // {name: 'don', numGuests: 0}
+console.log(rest2); // {name: 'mod plazza', owner: 'D Ben', numGuests: 10}
+console.log('====');
+
+// AND  assigning operator
+// rest1.owner = rest1.owner && '<ANONYMOUS>';
+// rest2.owner = rest2.owner && '<ANONYMOUS>';
+rest1.owner &&= '<ANONYMOUS>'; //same like : rest1.owner = rest1.owner && '<ANONYMOUS>';
+rest2.owner &&= '<ANONYMOUS>'; // same like : rest2.owner = rest2.owner && '<ANONYMOUS>';
+console.log(rest1); //{name: 'don', numGuests: 10, owner: undefined}
+console.log(rest2); //{name: 'mod plazza', owner: '<ANONYMOUS>', numGuests: 10}
