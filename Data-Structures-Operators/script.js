@@ -33,7 +33,19 @@ const restaurant = {
   },
 
   // Passing all 4 parameters
-  orderDelivery1: function ({ starterIndex, mainIndex, time, address }) {
+  // orderDelivery1: function ({ starterIndex, mainIndex, time, address }) {
+  //   console.log(
+  //     `Order received!!! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be deleiverd to ${address} at ${time}`
+  //   );
+
+  /*
+/////////////////////////////////////
+ES6 function declaration new way
+i.e removed function word
+
+*/
+
+  orderDelivery1({ starterIndex, mainIndex, time, address }) {
     console.log(
       `Order received!!! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be deleiverd to ${address} at ${time}`
     );
@@ -392,3 +404,101 @@ rest1.owner &&= '<ANONYMOUS>'; //same like : rest1.owner = rest1.owner && '<ANON
 rest2.owner &&= '<ANONYMOUS>'; // same like : rest2.owner = rest2.owner && '<ANONYMOUS>';
 console.log(rest1); //{name: 'don', numGuests: 10, owner: undefined}
 console.log(rest2); //{name: 'mod plazza', owner: '<ANONYMOUS>', numGuests: 10}
+console.log('====');
+
+/*
+/////////////////////////////////////
+The for or loop
+*/
+
+const menu1 = [...restaurant.mainMenu, ...restaurant.starterMenu];
+for (const item of menu1) console.log(item);
+console.log('====');
+
+for (const [i, el] of menu.entries()) {
+  console.log(`${i + 1} : ${el}`);
+}
+console.log('====');
+
+/*
+/////////////////////////////////////
+ES6 enhanced object literals
+*/
+
+const Jan = {
+  v1: {
+    Mon: 1,
+    Tue: 2,
+  },
+  v2: {
+    Wed: 3,
+    Thu: 4,
+  },
+};
+
+const trt = {
+  name: 'we',
+  Jan,
+};
+
+console.log(trt);
+console.log('====');
+
+// we can declare variable in ES6 enhance
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+
+const bdays = {
+  Jan: {
+    Mon: 4,
+    Tue: 4,
+    Sun: 5,
+  },
+  // we can write this way in ES6 enhance for Feb
+  [months[1]]: {
+    Mon: 3,
+    Tue: 4,
+    Sun: 5,
+  },
+  [months[2]]: {
+    Mon: 4,
+    Tue: 4,
+    Sun: 5,
+  },
+};
+
+console.log(bdays.Feb);
+console.log('====');
+/*
+/////////////////////////////////////
+ES6- Optional chaining
+*/
+
+if (restaurant.openingHours && restaurant.openingHours.mon)
+  console.log(restaurant.openingHours.mon.open); //nothing will return
+
+// optional chaining
+console.log(restaurant.openingHours.mon?.open); //undefined
+console.log('====');
+
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+for (const day of days) {
+  const open = restaurant.openingHours[day]?.open ?? 'closed';
+  console.log(`On ${day}, we open at ${open}`);
+}
+console.log('====');
+// for methods
+console.log(restaurant.order?.(0, 1) ?? 'Method does not exist');
+console.log('====');
+
+console.log(restaurant.orderRisoto?.(0, 1) ?? 'Method does not exist');
+
+// Arrays
+const users = [
+  {
+    name: 'rushi',
+    tel: 90,
+  },
+];
+console.log(users[0]?.name ?? 'User array empty');
+console.log(users[1]?.name ?? 'User array empty');
