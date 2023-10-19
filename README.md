@@ -1,3 +1,1 @@
-# Javascript coding problems
-
-
+# Javascript concepts and coding problems
