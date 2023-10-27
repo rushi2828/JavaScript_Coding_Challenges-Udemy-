@@ -213,3 +213,24 @@ const max = movements.reduce((acc, cur) => {
 console.log(max); //3000
 
 console.log('=====');
+
+// PIPELINE -  Chaining methods
+const totalDepositsUSD = movements
+  .filter(mov => mov > 0)
+  .map((mov, i, arr) => {
+    // console.log(arr);
+    return mov * euroToUsd;
+  })
+  // .map(mov => mov * eurToUsd)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(totalDepositsUSD);
+console.log('=====');
+
+///////////////////////////////////////
+// Find method = Find exactly one element
+
+const firstWithdraw = movements.find(mov => mov < 0);
+console.log(firstWithdraw);
+
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+console.log(account);
