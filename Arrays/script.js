@@ -154,6 +154,62 @@ const movementsDescription1 = movements.map(
 );
 
 console.log(movementsDescription1);
+console.log('=====');
 
 ///////////////////////////////////////
 // Filter method
+const deposits = movements.filter(function (mov) {
+  return mov > 0;
+});
+
+console.log(movements);
+console.log(deposits); //[200, 450, 3000, 70, 1300]
+
+// other way - not usable
+
+const depoistsOther = [];
+
+for (const mov of movements) if (mov > 0) depoistsOther.push(mov);
+console.log(depoistsOther); //[200, 450, 3000, 70, 1300]
+
+const withdrawal = movements.filter(mov => mov < 0);
+
+console.log(withdrawal); //[-400, -650, -130]
+console.log('=====');
+
+///////////////////////////////////////
+// Reduce method - snow ball effect i.e adding all elements
+//  (accumulator, currentValue, index , array)
+/*
+accumulator
+The value resulting from the previous call to callbackFn. On the first call, its value is initialValue if the latter is specified; otherwise its value is array[0].
+
+currentValue
+The value of the current element. On the first call, its value is array[0] if initialValue is specified; otherwise its value is array[1].
+
+currentIndex
+The index position of currentValue in the array. On the first call, its value is 0 if initialValue is specified, otherwise 1.
+
+array
+The array reduce() was called upon.
+*/
+const balance = movements.reduce(function (acc, cur, i, arr) {
+  console.log(`Iteration ${i} : ${acc} `);
+  return acc + cur;
+}, 0);
+
+// in arrow function above
+// const balance = movements.reduce((acc, cur) => acc + cur, 0);
+
+console.log(balance); //3840
+
+// calculate maximum number
+const max = movements.reduce((acc, cur) => {
+  if (acc > cur) {
+    return acc;
+  } else return cur;
+}, movements[0]);
+
+console.log(max); //3000
+
+console.log('=====');

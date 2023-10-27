@@ -86,6 +86,15 @@ const displayMovements = function (movements) {
 displayMovements(account1.movements);
 // console.log(containerMovements.innerHTML);
 
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce(function (acc, cur) {
+    return acc + cur;
+  }, 0);
+  labelBalance.textContent = `${balance}€`;
+};
+
+calcDisplayBalance(account1.movements); //3840€
+
 // compute username function for e.g Steven Thomas Williams // stw
 // const createUsername = function (user) {
 //   const username = user
