@@ -84,4 +84,27 @@ const displayMovements = function (movements) {
 };
 
 displayMovements(account1.movements);
-console.log(containerMovements.innerHTML);
+// console.log(containerMovements.innerHTML);
+
+// compute username function for e.g Steven Thomas Williams // stw
+// const createUsername = function (user) {
+//   const username = user
+//     .toLowerCase()
+//     .split(' ')
+//     .map(name => name[0])
+//     .join('');
+//   return username;
+// };
+
+const createUsername1 = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+
+createUsername1(accounts);
+console.log(accounts);

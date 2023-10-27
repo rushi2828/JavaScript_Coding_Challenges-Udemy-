@@ -92,7 +92,7 @@ const currencies = new Map([
 ]);
 
 // forEach function(current_value, key, map)
-// // below we didnt use map so removed from param
+// // below we didn't use map so removed from param
 currencies.forEach((value, key) => {
   console.log(`${key} : ${value}`);
 });
@@ -106,3 +106,54 @@ currenciesUnique.forEach(function (value, _, map) {
   console.log(`${value}: ${value}`);
 });
 console.log('=========');
+
+///////////////////////////////////////
+// Map method
+// using above movements array i.e const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const euroToUsd = 1.1;
+
+// const movementsUsd = movements.map(function (mov) {
+//   return mov * euroToUsd;
+// });
+
+// arrow function for above function-
+const movementsUsd = movements.map(mov => mov * euroToUsd);
+
+console.log(movements);
+
+console.log(movementsUsd); // [220.00000000000003, 495.00000000000006, -440.00000000000006, 3300.0000000000005, -715.0000000000001, -143, 77, 1430.0000000000002]
+console.log('=========');
+
+// diff way using with for
+const movementsUsdfor = [];
+for (const mov of movements) movementsUsdfor.push(mov * euroToUsd);
+
+console.log(movementsUsdfor); //[220.00000000000003, 495.00000000000006, -440.00000000000006, 3300.0000000000005, -715.0000000000001, -143, 77, 1430.0000000000002]
+
+// map method also we userd like forEach function (current element, index , array)
+// i.e map (current element, index , array)
+const movementsDescription = movements.map((mov, i) => {
+  if (mov > 0) {
+    return `Movement ${i + 1}: Deposited : ${mov}`;
+  } else {
+    return `Movement ${i + 1}: Withdraw : ${Math.abs(mov)}`;
+  }
+});
+
+console.log(movementsDescription);
+console.log('=====');
+
+// using abve function with turnary operator for code reduce purpose not related with map method just for using last learning chapters
+
+const movementsDescription1 = movements.map(
+  (mov, i) =>
+    `Movement ${i + 1}: You ${mov > 0 ? 'Deposited' : 'Withdraw'} : ${Math.abs(
+      mov
+    )}`
+);
+
+console.log(movementsDescription1);
+
+///////////////////////////////////////
+// Filter method
