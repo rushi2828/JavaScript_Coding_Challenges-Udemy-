@@ -1,5 +1,36 @@
 'strict mode';
 
+// Data
+const account1 = {
+  owner: 'Jonas Schmedtmann',
+  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+  interestRate: 1.2, // %
+  pin: 1111,
+};
+
+const account2 = {
+  owner: 'Jessica Davis',
+  movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+  interestRate: 1.5,
+  pin: 2222,
+};
+
+const account3 = {
+  owner: 'Steven Thomas Williams',
+  movements: [200, -200, 340, -300, -20, 50, 400, -460],
+  interestRate: 0.7,
+  pin: 3333,
+};
+
+const account4 = {
+  owner: 'Sarah Smith',
+  movements: [430, 1000, 700, 50, 90],
+  interestRate: 1,
+  pin: 4444,
+};
+
+const accounts = [account1, account2, account3, account4];
+
 let arr = ['a', 'b', 'c', 'd', 'e'];
 
 // slice
@@ -232,3 +263,133 @@ console.log('=====');
 const firstWithdraw = movements.find(mov => mov < 0);
 console.log(firstWithdraw);
 console.log('=====');
+
+///////////////////////////////////////
+// Some method
+// Some = It returns true if, in the array, it finds an element for which the provided function returns true; otherwise it returns false.
+
+console.log(movements);
+console.log(movements.includes(-130)); //true
+console.log('=====');
+
+const anyDeposits = movements.some(mov => mov < 0);
+console.log(anyDeposits); //true
+const anyDeposits1 = movements.some(mov => mov > 50000); //true
+console.log(anyDeposits1); //false
+console.log('=====');
+
+// Every method
+//  return true if all elements of an array are satisfied the condition
+
+console.log(movements.every(mov => mov > 0)); //false
+console.log('=====');
+
+///////////////////////////////////////
+// Flat and flatMap methods
+// No callback functions
+
+const ar = [[1, 2, 3], 4, 5, 6, [7, 8, 9]];
+console.log(ar.flat()); //[1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat(2)); //[1, 2, 3, 4, 5, 6, 7, 8];
+console.log('=====');
+
+///////////////////////////////////////
+// flatMap methods
+const arr4 = [1, 2, 1];
+
+const result = arr4.flatMap(num => (num === 2 ? [2, 2] : 1));
+
+console.log(result); //[1, 2, 2, 1]
+console.log('=====');
+
+///////////////////////////////////////
+// sort methods - sorting based on Strings and if we used on number then it converts t string and then sort
+
+const owners = ['rushi', 'pawan', 'tai', 'sandhya'];
+
+console.log(owners.sort());
+
+// Numbers
+console.log(movements);
+
+// return < 0, A, B (keep order)
+// return > 0, B, A (switch order)
+
+// Ascending
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (a < b) return -1;
+// });
+movements.sort((a, b) => a - b);
+console.log(movements);
+
+// Descending
+// movements.sort((a, b) => {
+//   if (a > b) return -1;
+//   if (a < b) return 1;
+// });
+movements.sort((a, b) => b - a);
+console.log(movements);
+
+///////////////////////////////////////
+// Array Methods Practice
+
+// 1.
+const bankDepositSum = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov > 0)
+  .reduce((sum, cur) => sum + cur, 0);
+
+console.log(bankDepositSum);
+
+// 2.
+// const numDeposits1000 = accounts
+//   .flatMap(acc => acc.movements)
+//   .filter(mov => mov >= 1000).length;
+
+const numDeposits1000 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((count, cur) => (cur >= 1000 ? ++count : count), 0);
+
+console.log(numDeposits1000);
+
+// Prefixed ++ oeprator
+let a = 10;
+console.log(++a);
+console.log(a);
+
+// 3.
+const { deposits1, withdrawals } = accounts
+  .flatMap(acc => acc.movements)
+  .reduce(
+    (sums, cur) => {
+      // cur > 0 ? (sums.deposits += cur) : (sums.withdrawals += cur);
+      sums[cur > 0 ? 'deposits1' : 'withdrawals'] += cur;
+      return sums;
+    },
+    { deposits: 0, withdrawals: 0 }
+  );
+
+console.log(deposits1, withdrawals);
+
+// 4.
+// this is a nice title -> This Is a Nice Title
+const convertTitleCase = function (title) {
+  const capitzalize = str => str[0].toUpperCase() + str.slice(1);
+
+  const exceptions = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
+
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map(word => (exceptions.includes(word) ? word : capitzalize(word)))
+    .join(' ');
+
+  return capitzalize(titleCase);
+};
+
+console.log(convertTitleCase('this is a nice title'));
+console.log(convertTitleCase('this is a LONG title but not too long'));
+console.log(convertTitleCase('and here is another title with an EXAMPLE'));
