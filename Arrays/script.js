@@ -148,7 +148,7 @@ console.log('=====');
 
 const movementsDescription1 = movements.map(
   (mov, i) =>
-    `Movement ${i + 1}: You ${mov > 0 ? 'Deposited' : 'Withdraw'} : ${Math.abs(
+    `Movement ${i + 1}: You ${mov > 0 ? 'Deposited' : 'Withdraw'} ${Math.abs(
       mov
     )}`
 );
@@ -231,6 +231,4 @@ console.log('=====');
 
 const firstWithdraw = movements.find(mov => mov < 0);
 console.log(firstWithdraw);
-
-const account = accounts.find(acc => acc.owner === 'Jessica Davis');
-console.log(account);
+console.log('=====');
