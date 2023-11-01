@@ -190,3 +190,51 @@ console.log(future.getMinutes());
 console.log(future.getSeconds());
 console.log(future.toISOString());
 console.log(future.getTime());
+console.log('=========');
+
+////////////////////
+// setTimeOut
+
+//In below code output will be
+//first print 'Waiting...' then after 4 seconds wait and then print 'here is your pizza🍕'
+// setTimeout(() => console.log('here is your pizza🍕'), 4000); //here is your pizza"🍕  - print this after 4 sec
+// console.log('Waiting...');
+
+// passing arguments in setTimeOut
+
+// setTimeout(
+//   (ing1, ing2) => console.log(`Here is your pizza with ${ing1} and ${ing2}🍕`),
+//   4000,
+//   'olives',
+//   'spinach'
+// ); //Here is your pizza with olives and spinach🍕 - print this after 4 sec
+// console.log('Waiting...');
+
+//cancel the timeout
+const ingrediants = ['olives', 'tomato'];
+const pizzTimer = setTimeout(
+  (ing1, ing2) => console.log(`Here is your pizza with ${ing1} and ${ing2}🍕`),
+  4000,
+  ...ingrediants
+);
+console.log('Waiting...');
+console.log('====================');
+
+if (ingrediants.includes('spinach')) clearTimeout(pizzTimer);
+// it means if spinach is in an array then setTimeOut not executing only we get 'Waiting...' in console and if removed or replaced spinach from an arry then
+// after 'Waiting...' and 4 sec timeout then 'Here is your pizza with ${ing1} and ${ing2} 🍕' this will print
+// Here is your pizza with olives and tomato🍕
+
+// setInterval
+// setInterval(function () {
+//   const now = new Date();
+//   const date = now.getDate();
+//   const month = now.getMonth() + 1;
+//   const year = now.getFullYear();
+//   const hr = now.getHours();
+//   const min = now.getMinutes();
+//   const sec = now.getSeconds();
+
+//   console.log(now); //// printing current time after every 2 seconds selay
+//   console.log(`${date}/${month}/${year} - ${hr}:${min}:${sec}`); // printing current time after every 2 seconds selay
+// }, 2000);
