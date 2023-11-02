@@ -148,3 +148,89 @@ const addTaxRate = function (rate) {
 const addVAT2 = addTaxRate(0.23);
 console.log(addVAT2(100)); //123
 console.log(addVAT2(23)); //28.29
+console.log('========');
+
+/////////////////
+/**
+# Closures
+- A closure is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment).
+- A function has access to the variable environment og the execution context in which was created, even after that execution context is gone 
+- variable environment attached to the function, exactly as it was at the time and place the function was created   
+ */
+
+const secureBooking = () => {
+  let passengerCount = 0;
+
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
+};
+
+const booker = secureBooking();
+booker(); //1
+booker(); //2
+booker(); //3
+booker(); //4
+booker(); //5
+console.log('========');
+
+// examples from MDN
+function init() {
+  var name = 'Mozilla'; // name is a local variable created by init
+  function displayName() {
+    // displayName() is the inner function, that forms the closure
+    console.log(name); // use variable declared in the parent function
+  }
+  displayName();
+}
+init(); // Mozilla
+console.log('========');
+
+// more examples on Closures
+let f;
+const g = () => {
+  const a = 23;
+  f = () => {
+    console.log(a * 2);
+  };
+};
+
+const h = () => {
+  const b = 777;
+  f = () => {
+    console.log(b * 2);
+  };
+};
+
+g();
+f();
+// for above output is 46
+
+// Reassinging function
+h();
+f();
+// for above output is 1554
+
+console.log('====');
+// real use case example
+const boardPassengers = function (n, wait) {
+  // const perGroup = n / 3;
+  setTimeout(() => {
+    console.log(`We are boarding now ${n} pasengers`);
+    console.log(`There are 3 groups, each group with ${perGroup} passengers`);
+  }, wait * 1000);
+
+  console.log(`Will satrt onboarding in ${wait} seconds`);
+};
+
+let perGroup = 1000; // here if we comment perfGroup variable from function then this global value will assign to perGroup
+boardPassengers(180, 3);
+
+// after global value assigned to the above i.e let perGroup = 1000; then output will be
+/*
+ Will satrt onboarding in 3 seconds
+
+ We are boarding now 180 pasengers
+ There are 3 groups, each group with 1000 passengers
+*/
