@@ -19,25 +19,75 @@ const Person = function (firstName, birthYear) {
   // };
 };
 
-const person = new Person('Rushi', 1989);
-console.log(person);
+const rushi = new Person('Rushi', 1989);
+console.log(rushi);
 
 // 1. New {} is created
 // 2. function is called, this = {}
 // 3. {} linked to prototype
 // 4. function automatically return {}
 
-const person1 = new Person('John', 1999); //Person {firstName: 'Rushi', birthYear: 1989}
+const john = new Person('John', 1999); //Person {firstName: 'Rushi', birthYear: 1989}
 
-const person2 = new Person('Tom', 1990);
+const tom = new Person('Tom', 1990);
 
-console.log(person1, person2); //Person {firstName: 'John', birthYear: 1999} Person {firstName: 'Tom', birthYear: 1990}
+console.log(john, tom); //Person {firstName: 'John', birthYear: 1999} Person {firstName: 'Tom', birthYear: 1990}
 
 // js doesn't have classes like java however we did create an object from constructor function like above person, person1 and person2
 
-console.log(person instanceof Person); //true
+console.log(rushi instanceof Person); //true
 
 const test = 'test';
 
 console.log(test instanceof Person); // false
 console.log('=========');
+
+///////////////////////////////////////
+// Prototypes
+// console.log(Person.prototype);
+
+Person.prototype.calcAge = function () {
+  console.log(2037 - this.birthYear);
+};
+
+// calAge() is created under [[Prototype]] : Object
+
+rushi.calcAge(); //48
+john.calcAge(); // 38
+
+console.log(rushi);
+
+console.log('=========');
+
+console.log(rushi.__proto__);
+console.log(rushi.__proto__ === Person.prototype); //true
+
+console.log(Person.prototype.isPrototypeOf(rushi)); //true
+
+console.log(Person.prototype.isPrototypeOf(Person)); //false
+console.log('=========');
+
+// height property is under prototype not like firstName
+Person.prototype.height = 5.9;
+console.log(rushi.hasOwnProperty('height')); //false
+console.log(rushi.hasOwnProperty('firstName')); //true
+console.log(rushi.height); //5.9
+
+///////////////////////////////////////
+// Prototypal Inheritance on Built-In Objects
+console.log(rushi.__proto__); //height: 5.9, calcAge: ƒ, constructor: ƒ}
+// Object.prototype (top of prototype chain)
+console.log(rushi.__proto__.__proto__); //{constructor: ƒ, __defineGetter__: ƒ, __defineSetter__: ƒ, hasOwnProperty: ƒ, __lookupGetter__: ƒ, …}
+console.log(rushi.__proto__.__proto__.__proto__); //null
+
+const arr = [3, 6, 6, 5, 6, 9, 9, 3]; // new Array === []
+console.log(arr.__proto__);
+console.log(arr.__proto__ === Array.prototype); //true
+
+// created unique function in prototype so all arrays can access unique property
+// can not use ()=> because of arroow fn doesn't have it's own 'this'
+Array.prototype.unique = function () {
+  return [...new Set(this)];
+};
+
+console.log(arr.unique()); //[3, 6, 5, 9] return unique values
