@@ -91,3 +91,35 @@ Array.prototype.unique = function () {
 };
 
 console.log(arr.unique()); //[3, 6, 5, 9] return unique values
+
+///////////////////////////////////////
+// ES6 Classes
+
+// Class expression
+// const PersonCl = class {}
+
+// Class declaration
+class PersonCl {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+
+  // it's created under the prototye
+  calcAge = function () {
+    console.log(2037 - this.birthYear);
+  };
+
+  greet() {
+    console.log(`Hey ${this.fullName}`);
+  }
+}
+
+const joe = new PersonCl('Joe Root', 1987);
+console.log(joe);
+joe.calcAge(); //50
+joe.greet(); // Hey Joe Root
+
+// 1. Classed are NOT hoisted i.e declare before use unlike function
+// 2. Classed are also first-class citizensi.e pass that into functions and return from functions
+// 3. Classes are executed in strict mode
