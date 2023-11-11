@@ -168,3 +168,62 @@ console.log(steven.__proto__ === PersonProto); //true
 const sarah = Object.create(PersonProto);
 sarah.init('Sarah', 1979);
 sarah.calcAge();
+console.log('=========');
+
+///////////////////////////////////////
+// Inheritance Between "Classes": Constructor Functions
+
+// -----> already declare in top of code instanceof;s her for just a ref
+// const Person = function (firstName, birthYear) {
+//   this.firstName = firstName;
+//   this.birthYear = birthYear;
+// };
+
+// Person.prototype.calcAge = function () {
+//   console.log(2037 - this.birthYear);
+// };
+
+const Student = function (firstName, birthYear, course) {
+  // this.firstName = firstName;
+  // this.birthYear = birthYear;
+  // to replace above duplicate code we are using Person's firstName and birthYear like below
+  Person.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+// Linking prototypes
+Student.prototype = Object.create(Person.prototype);
+
+Student.prototype.introduce = function () {
+  console.log(`My name is ${this.firstName} and I stidied ${this.course}`);
+};
+
+const mike = new Student('Mike', 1998, 'CSE');
+console.log(mike); //Student {firstName: 'Mike', birthYear: 1998, course: 'CSE'}
+
+mike.introduce(); // My name is Mike and I stidied CSE
+mike.calcAge(); // 39
+
+console.log(mike.__proto__);
+console.log(mike.__proto__.__proto__);
+
+console.log(mike instanceof Student); // true
+console.log(mike instanceof Person); // true
+console.log(mike instanceof Object); // true
+
+Student.prototype.constructor = Student;
+console.dir(Student.prototype.constructor);
+console.log('=========');
+
+// Another example for call() method
+function Product(name, price) {
+  this.name = name;
+  this.price = price;
+}
+
+function Food(name, price) {
+  Product.call(this, name, price);
+  this.category = 'food';
+}
+
+console.log(new Food('cheese', 5).name); // "cheese"
